@@ -44,6 +44,10 @@ h3 {
     font-weight: 600;
 }
 
+form {
+    width: 100%;
+}
+
 label {
     display: block;
     margin-bottom: 20px;
@@ -52,7 +56,8 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 12px 15px;
     margin-top: 8px;
@@ -64,9 +69,28 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="email"]:focus {
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Radio button styling */
+input[type="radio"] {
+    margin-right: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+input[type="radio"]:first-of-type {
+    margin-left: 0;
+}
+
+label:has(input[type="radio"]) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 input[type="submit"] {
@@ -82,6 +106,7 @@ input[type="submit"] {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-top: 10px;
 }
 
 input[type="submit"]:hover {
