@@ -17,7 +17,7 @@
         if(empty($firstname) || empty($lastname) || empty($gender) || empty($phone) || 
             empty($email) || empty($username) || empty($password)){
                 
-                echo "All fileds should be filled.";
+                header("Location:Registration.php");
                 exit();
             }
             //email

@@ -1,17 +1,50 @@
 <?php 
+//Session start
+    require_once("Database/database.php");
+    session_start();
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
+
             if(!empty($_POST['username']) && (!empty($_POST['password']))){
-                $username=$_POST['username'];
-                $password=$_POST['password'];
+                $username=trim($_POST['username']);
+                $password=trim($_POST['password']);
+
+                //Checking the username.
+
+                $check = $conn->prepare("SELECT * FROM users WHERE username=?");
+                $check->bind_param("s",$username);
+                $check->execute();
+                $result = $check->get_result();
+
+                if($result->num_rows ==1){
+                    $user = $result->fetch_assoc();
+                    $verify_pw = $user["password"];
+
+                    //verifying the pw.
+                    if(password_verify($password,$verify_pw)){
+                     $_SESSION["username"]= $user["username"];
+                     $_SESSION["id"]=$user["id"];
+                     header("Location: Dashboard/Dashboard.php");
+                     exit();
+                }
+                else{
+                    header("Location:index.php");
+                    exit();
+                }
+
+
 
             }
             else{
-                echo "Enter username or password";
+                header("Location:index.php");
+               exit();
             }
+               $check->close();
+           
     }
-
-
+  
+     $conn->close();
+    }
 
 ?>
 
