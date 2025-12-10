@@ -5,7 +5,7 @@
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
 
-            if(!empty($_POST['username']) && (!empty($_POST['password']))){
+            if(!empty($_POST['username']) && !empty($_POST['password'])){
                 $username=trim($_POST['username']);
                 $password=trim($_POST['password']);
 
@@ -23,27 +23,37 @@
                     //verifying the pw.
                     if(password_verify($password,$verify_pw)){
                      $_SESSION["username"]= $user["username"];
+                     $_SESSION["firstname"]=$user["first_name"];
                      $_SESSION["id"]=$user["id"];
+                     $check->close();
+                     $conn->close();
                      header("Location: Dashboard/Dashboard.php");
                      exit();
+
+                    
+
                 }
                 else{
+                    //incoreect pw.
+                    $check->close();
+                    $conn->close();
                     header("Location:index.php");
                     exit();
                 }
-
-
-
             }
             else{
+                //username not found
+                $check->close();
+                $conn->close();
                 header("Location:index.php");
                exit();
-            }
-               $check->close();
-           
+            }  
     }
-  
-     $conn->close();
+    else{
+        //all field should be filled.
+        header("Location:index.php");
+        exit();
+    }
     }
 
 ?>
