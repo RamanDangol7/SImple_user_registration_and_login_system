@@ -69,23 +69,34 @@
 <body>
     <div class="container">
         <h3> Welcome To Our Webiste</h3>
-        <form action ="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method = "POST">
+        <form id ="login_form" action ="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method = "POST">
     <label>
        Username  
-       <input type = "text" name="username">
+       <input type = "text" name="username" id ="username">
     </label>
     <label> 
         Password  
-        <input type ="password" name = "password">
+        <input type ="password" name = "password" id ="password">
     </label>
 
     <label>
-    <input type ="submit" name ="login" value="login">
+    <input id ="submit" type ="submit" name ="login" value="login">
     </label>
 
          <p>Don't have an account? <a href="Registration.php"> Sign up</a></p>
 </form>
     </div>
+    <script>
+        const form = document.getElementById("login_form");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
 
+        form.addEventListener("submit",(event) =>{
+                if(username.value === ""|| password.value ===""){
+                    alert("Please input all filed.");
+                    event.preventDefault();
+                }
+        });
+    </script>
 </body>
 </html>
